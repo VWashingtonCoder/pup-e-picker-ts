@@ -1,10 +1,9 @@
 // you can use this type for react children if you so choose
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { FunctionalDogs } from "./FunctionalDogs";
-import { FunctionalCreateDogForm } from "./FunctionalCreateDogForm";
 
-export const FunctionalSection = () => {
+export const FunctionalSection = ({ children }: { children: ReactNode }) => {
+
   return (
     <section id="main-section">
       <div className="container-header">
@@ -28,8 +27,7 @@ export const FunctionalSection = () => {
         </div>
       </div>
       <div className="content-container">
-        <FunctionalDogs />
-        <FunctionalCreateDogForm />
+        {children}
       </div>
     </section>
   );

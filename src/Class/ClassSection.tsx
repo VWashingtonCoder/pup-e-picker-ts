@@ -1,11 +1,15 @@
 // you can use `ReactNode` to add a type to the children prop
 import { Component, ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { ClassDogs } from "./ClassDogs";
-import { ClassCreateDogForm } from "./ClassCreateDogForm";
 
-export class ClassSection extends Component {
+type ClassSectionProps = {
+  children: ReactNode;
+};
+
+export class ClassSection extends Component <ClassSectionProps> {
   render() {
+    const { children } = this.props;
+
     return (
       <section id="main-section">
         <div className="container-header">
@@ -31,8 +35,7 @@ export class ClassSection extends Component {
           </div>
         </div>
         <div className="content-container">
-          <ClassDogs />
-          <ClassCreateDogForm />
+          {children}
         </div>
       </section>
     );
