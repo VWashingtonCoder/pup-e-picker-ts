@@ -14,30 +14,19 @@ export function FunctionalApp() {
   const unfavoriteDogs = allDogs.filter((dog) => !dog.isFavorite);
 
   const fetchAllDogs = () => {
-    getAllDogs()
-      .then((dogs) => {
-        setView("allDogs");
-        setAllDogs(dogs)
-        setDogs(dogs);
-      });
+    getAllDogs().then((dogs) => {
+      setView("allDogs");
+      setAllDogs(dogs);
+      setDogs(dogs);
+    });
   };
 
   const changeView = (newView: string) => {
     const nextView = newView === view ? "allDogs" : newView;
-    
-    switch (nextView) {
-      case "favoriteDogs":
-        setDogs(favoriteDogs);
-        break;
-      case "unfavoriteDogs":
-        setDogs(unfavoriteDogs);
-        break;
-      case "allDogs":
-        setDogs(allDogs);
-        break;
-      default:
-        break;
-    }
+
+    if (nextView === "favoriteDogs") setDogs(favoriteDogs);
+    else if (nextView === "unfavoriteDogs") setDogs(unfavoriteDogs);
+    else if (nextView === "allDogs") setDogs(allDogs);
 
     setView(nextView);
   };
@@ -51,8 +40,8 @@ export function FunctionalApp() {
       <header>
         <h1>pup-e-picker (Functional)</h1>
       </header>
-      <FunctionalSection 
-        view={view} 
+      <FunctionalSection
+        view={view}
         changeView={changeView}
         favoriteCount={favoriteDogs.length}
         unfavoriteCount={unfavoriteDogs.length}

@@ -1,13 +1,8 @@
 import { DogCard } from "../Shared/DogCard";
-import { Dog } from "../types";
+import { DogsProps } from "../types";
 import { Requests } from "../api";
 
-type FunctionalDogsProps = {
-  dogs: Dog[];
-  refreshDogs: () => void;
-};
-
-export const FunctionalDogs = ({ dogs, refreshDogs }: FunctionalDogsProps) => {
+export const FunctionalDogs = ({ dogs, refreshDogs }: DogsProps) => {
   const { deleteDog, updateDog } = Requests;
 
   return (
