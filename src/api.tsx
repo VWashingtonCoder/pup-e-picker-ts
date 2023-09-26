@@ -1,3 +1,5 @@
+import { Dog } from "./types";
+
 export const baseUrl = "http://localhost:3000";
 
 export const Requests = {
@@ -9,7 +11,17 @@ export const Requests = {
 
   // should create a dog in the database from a partial dog object
   // and return a promise with the result
-  postDog: () => {},
+  postDog: (dogData: Dog) => {
+    return fetch(`${baseUrl}/dogs`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dogData),
+    })
+      .then((res) => res.json())
+      .catch((err) => console.log(err));
+  },
 
   deleteDog: (id: number) => {
     return fetch(`${baseUrl}/dogs/${id}`, {

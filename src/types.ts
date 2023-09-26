@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 // Add your own custom types in here
 export type Dog = {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   image: string;
@@ -19,4 +19,8 @@ export type SectionProps = {
 export type DogsProps = {
   dogs: Dog[];
   refreshDogs: () => void;
+};
+
+export type CreateDogProps = {
+    refreshDogs: () => void;
 };

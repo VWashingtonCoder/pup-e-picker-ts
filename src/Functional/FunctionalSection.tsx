@@ -20,17 +20,19 @@ export const FunctionalSection = (props: SectionProps) => {
             favorited ( {favoriteCount} )
           </div>
 
-          <div 
-            className={`selector ${view === "unfavoriteDogs" && "active"}`} 
+          <div
+            className={`selector ${view === "unfavoriteDogs" && "active"}`}
             onClick={() => {
               changeView("unfavoriteDogs");
             }}
           >
             unfavorited ( {unfavoriteCount} )
           </div>
-          <div 
-            className={`selector ${view === "createDog" && "active"}`} 
-            onClick={() => {changeView("createDog")}}
+          <div
+            className={`selector ${view === "createDog" && "active"}`}
+            onClick={() => {
+              changeView("createDog");
+            }}
           >
             create dog
           </div>

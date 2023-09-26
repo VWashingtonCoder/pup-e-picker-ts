@@ -15,7 +15,6 @@ export function FunctionalApp() {
 
   const fetchAllDogs = () => {
     getAllDogs().then((dogs) => {
-      setView("allDogs");
       setAllDogs(dogs);
       setDogs(dogs);
     });
@@ -49,7 +48,7 @@ export function FunctionalApp() {
         {view !== "createDog" ? (
           <FunctionalDogs dogs={dogs} refreshDogs={fetchAllDogs} />
         ) : (
-          <FunctionalCreateDogForm />
+          <FunctionalCreateDogForm refreshDogs={fetchAllDogs} />
         )}
       </FunctionalSection>
     </div>

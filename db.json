@@ -139,6 +139,13 @@
       "image": "/assets/blue-heeler.png",
       "isFavorite": false,
       "id": 20
+    },
+    {
+      "name": "Kyle",
+      "description": "A great boy in all ways",
+      "image": "/assets/boxer.jpeg",
+      "isFavorite": false,
+      "id": 21
     }
   ]
 }
