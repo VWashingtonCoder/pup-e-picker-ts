@@ -16,6 +16,7 @@ export function FunctionalApp() {
   const fetchAllDogs = () => {
     getAllDogs()
       .then((dogs) => {
+        setView("allDogs");
         setAllDogs(dogs)
         setDogs(dogs);
       });
@@ -57,7 +58,7 @@ export function FunctionalApp() {
         unfavoriteCount={unfavoriteDogs.length}
       >
         {view !== "createDog" ? (
-          <FunctionalDogs dogs={dogs} />
+          <FunctionalDogs dogs={dogs} refreshDogs={fetchAllDogs} />
         ) : (
           <FunctionalCreateDogForm />
         )}
