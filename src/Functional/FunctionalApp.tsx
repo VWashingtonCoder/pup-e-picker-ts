@@ -57,7 +57,7 @@ export function FunctionalApp() {
         unfavoriteCount={unfavoriteDogs.length}
       >
         {view !== "createDog" ? (
-          <FunctionalDogs />
+          <FunctionalDogs dogs={dogs} />
         ) : (
           <FunctionalCreateDogForm />
         )}
