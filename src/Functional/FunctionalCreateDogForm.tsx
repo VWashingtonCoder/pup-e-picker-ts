@@ -27,7 +27,7 @@ export const FunctionalCreateDogForm = ({ refreshDogs }: CreateDogProps) => {
       isFavorite: false,
     };
     postDog(newDog).then(() => {
-      alert(`created dog: ${name}`);
+      alert(`Dog Created: ${name}`);
       refreshDogs();
       setFormValues({
         name: "",

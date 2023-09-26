@@ -4,7 +4,7 @@
       "name": "Wilber",
       "image": "/assets/chihuahua.avif",
       "description": "magenta boo colossal unpleasant seize Tactics Florida",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 0
     },
     {
@@ -18,7 +18,7 @@
       "name": "Antonia",
       "image": "/assets/chihuahua.avif",
       "description": "ampere Metal lavender Funk Fundamental payment wireless",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 2
     },
     {
@@ -137,7 +137,7 @@
       "name": "asdfasdf",
       "description": "asdfasdf",
       "image": "/assets/blue-heeler.png",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 20
     },
     {

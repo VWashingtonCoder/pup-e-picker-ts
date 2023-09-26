@@ -4,30 +4,35 @@ import { FunctionalDogs } from "./FunctionalDogs";
 import { FunctionalSection } from "./FunctionalSection";
 import { Requests } from "../api";
 import { Dog } from "../types";
+import { set } from "lodash-es";
 
 export function FunctionalApp() {
   const { getAllDogs } = Requests;
   const [view, setView] = useState("allDogs");
   const [dogs, setDogs] = useState([] as Dog[]);
   const [allDogs, setAllDogs] = useState([] as Dog[]);
-  const favoriteDogs = allDogs.filter((dog) => dog.isFavorite);
-  const unfavoriteDogs = allDogs.filter((dog) => !dog.isFavorite);
+  const favoriteDogsCount = allDogs.filter((dog) => dog.isFavorite).length;
+  const unfavoriteDogsCount = allDogs.filter((dog) => !dog.isFavorite).length;
 
-  const fetchAllDogs = () => {
-    getAllDogs().then((dogs) => {
-      setAllDogs(dogs);
-      setDogs(dogs);
-    });
+  const setDogsByView = (newView: string, allDogData: Dog[]) => {
+    if (newView === "favoriteDogs")
+      setDogs(allDogData.filter((dog) => dog.isFavorite));
+    else if (newView === "unfavoriteDogs")
+      setDogs(allDogData.filter((dog) => !dog.isFavorite));
+    else if (newView === "allDogs") setDogs(allDogData);
   };
 
   const changeView = (newView: string) => {
     const nextView = newView === view ? "allDogs" : newView;
-
-    if (nextView === "favoriteDogs") setDogs(favoriteDogs);
-    else if (nextView === "unfavoriteDogs") setDogs(unfavoriteDogs);
-    else if (nextView === "allDogs") setDogs(allDogs);
-
+    setDogsByView(nextView, allDogs);
     setView(nextView);
+  };
+
+  const fetchAllDogs = () => {
+    getAllDogs().then((allDogData) => {
+      dogs.length === 0 ? setDogs(allDogData) : setDogsByView(view, allDogData);
+      setAllDogs(allDogData);
+    });
   };
 
   useEffect(() => {
@@ -42,8 +47,8 @@ export function FunctionalApp() {
       <FunctionalSection
         view={view}
         changeView={changeView}
-        favoriteCount={favoriteDogs.length}
-        unfavoriteCount={unfavoriteDogs.length}
+        favoriteCount={favoriteDogsCount}
+        unfavoriteCount={unfavoriteDogsCount}
       >
         {view !== "createDog" ? (
           <FunctionalDogs dogs={dogs} refreshDogs={fetchAllDogs} />
