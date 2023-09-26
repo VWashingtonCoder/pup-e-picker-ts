@@ -1,9 +1,16 @@
-// you can use this type for react children if you so choose
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
-export const FunctionalSection = ({ children }: { children: ReactNode }) => {
+type FunctionalSectionProps = {
+  children: ReactNode;
+  view: string;
+  favoriteCount: number;
+  unfavoriteCount: number;
+  changeView: (view: string) => void;
+};
 
+export const FunctionalSection = (props: FunctionalSectionProps) => {
+  const { children, view, changeView, favoriteCount, unfavoriteCount } = props;
   return (
     <section id="main-section">
       <div className="container-header">
@@ -12,23 +19,32 @@ export const FunctionalSection = ({ children }: { children: ReactNode }) => {
           Change to Class
         </Link>
         <div className="selectors">
-          {/* This should display the favorited count */}
-          <div className={`selector active`} onClick={() => {}}>
-            favorited ( 12 )
+          <div
+            className={`selector ${view === "favoriteDogs" && "active"}`}
+            onClick={() => {
+              changeView("favoriteDogs");
+            }}
+          >
+            favorited ( {favoriteCount} )
           </div>
 
-          {/* This should display the unfavorited count */}
-          <div className={`selector`} onClick={() => {}}>
-            unfavorited ( 25 )
+          <div 
+            className={`selector ${view === "unfavoriteDogs" && "active"}`} 
+            onClick={() => {
+              changeView("unfavoriteDogs");
+            }}
+          >
+            unfavorited ( {unfavoriteCount} )
           </div>
-          <div className={`selector`} onClick={() => {}}>
+          <div 
+            className={`selector ${view === "createDog" && "active"}`} 
+            onClick={() => {changeView("createDog")}}
+          >
             create dog
           </div>
         </div>
       </div>
-      <div className="content-container">
-        {children}
-      </div>
+      <div className="content-container">{children}</div>
     </section>
   );
 };
