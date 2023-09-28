@@ -52,7 +52,6 @@ export class ClassApp extends Component {
 
   render() {
     const { view, isLoading, dogs, allDogs } = this.state;
-    const { getAllDogs } = Requests;
     const favoriteDogsCount = allDogs.filter((dog) => dog.isFavorite).length;
     const unfavoriteDogsCount = allDogs.filter((dog) => !dog.isFavorite).length;
 

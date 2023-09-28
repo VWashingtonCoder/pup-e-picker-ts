@@ -134,13 +134,6 @@
       "id": 19
     },
     {
-      "name": "asdfasdf",
-      "description": "asdfasdf",
-      "image": "/assets/blue-heeler.png",
-      "isFavorite": true,
-      "id": 20
-    },
-    {
       "name": "Kyle",
       "description": "A great boy in all ways",
       "image": "/assets/boxer.jpeg",
