@@ -1,14 +1,12 @@
 // you can use `ReactNode` to add a type to the children prop
 import { Component, ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { SectionProps } from "../types";
 
-type ClassSectionProps = {
-  children: ReactNode;
-};
-
-export class ClassSection extends Component <ClassSectionProps> {
+export class ClassSection extends Component<SectionProps> {
   render() {
-    const { children } = this.props;
+    const { children, view, changeView, favoriteCount, unfavoriteCount } =
+      this.props;
 
     return (
       <section id="main-section">
@@ -21,22 +19,29 @@ export class ClassSection extends Component <ClassSectionProps> {
 
           <div className="selectors">
             {/* This should display the favorited count */}
-            <div className={`selector`} onClick={() => {}}>
-              favorited ( 0 )
+            <div
+              className={`selector ${view === "favoriteDogs" && "active"}`}
+              onClick={() => changeView("favoriteDogs")}
+            >
+              favorited ( {favoriteCount} )
             </div>
 
             {/* This should display the unfavorited count */}
-            <div className={`selector`} onClick={() => {}}>
-              unfavorited ( 0 )
+            <div
+              className={`selector ${view === "unfavoriteDogs" && "active"}`}
+              onClick={() => changeView("unfavoriteDogs")}
+            >
+              unfavorited ( {unfavoriteCount} )
             </div>
-            <div className={`selector active`} onClick={() => {}}>
+            <div
+              className={`selector ${view === "createDog" && "active"}`}
+              onClick={() => changeView("createDog")}
+            >
               create dog
             </div>
           </div>
         </div>
-        <div className="content-container">
-          {children}
-        </div>
+        <div className="content-container">{children}</div>
       </section>
     );
   }
