@@ -1,6 +1,6 @@
 import { Dog } from "./types";
 
-export const baseUrl = "http://localhost:3000";
+const baseUrl = "http://localhost:3000";
 
 export const Requests = {
   getAllDogs: () => {
@@ -9,8 +9,6 @@ export const Requests = {
       .catch((err) => console.log(err));
   },
 
-  // should create a dog in the database from a partial dog object
-  // and return a promise with the result
   postDog: (dogData: Dog) => {
     return fetch(`${baseUrl}/dogs`, {
       method: "POST",

@@ -1,5 +1,5 @@
 // you can use `ReactNode` to add a type to the children prop
-import { Component, ReactNode } from "react";
+import { Component } from "react";
 import { Link } from "react-router-dom";
 import { SectionProps } from "../types";
 

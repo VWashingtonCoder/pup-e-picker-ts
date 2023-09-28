@@ -40,17 +40,17 @@ To get this project setup, you should:
 
 ## Standard Requirements
 
-- [ ] Setup eslint
-- [ ] Pass all linting checks
+- [X] Setup eslint
+- [X] Pass all linting checks
 
 - To check if linting passes, run `npm run lint`
 
-- [ ] Format code with prettier
-- [ ] State should not be duplicated
-- [ ] Variables should be named logically
-- [ ] No unnecessary console logs
-- [ ] No commented out blocks of code (Code comments are fine)
-- [ ] Setup a github repository with your submission as the `main` branch, you will submit a link to this for grading (NOT A ZIP FILE)
+- [X] Format code with prettier
+- [X] State should not be duplicated
+- [X] Variables should be named logically
+- [X] No unnecessary console logs
+- [X] No commented out blocks of code (Code comments are fine)
+- [X] Setup a github repository with your submission as the `main` branch, you will submit a link to this for grading (NOT A ZIP FILE)
 
 ## Typescript Specific Requirements
 
@@ -89,22 +89,22 @@ You should use conditional rendering to show different components inside of the 
 
 ### when no tab is active
 
-- [ ] show the `(Functional | Class)Dogs` component
+- [X] show the `(Functional | Class)Dogs` component
 - [x] the dogs we can see should be ALL OF THE DOGS FETCHED
 
 ### when the `favorited` tab is active
 
-- [ ] shows the `(Functional | Class)Dogs` component
+- [X] shows the `(Functional | Class)Dogs` component
 - [x] the dogs we can see should be ONLY THE DOGS WHERE `isFavorite` IS TRUE
 
 ### when the `unfavorited` tab is active
 
-- [ ] should show the `Dogs` component
+- [X] should show the `Dogs` component
 - [x] the selected dogs should be ONLY THE DOGS WHERE `isFavorite` IS FALSE
 
 ### when the create dog tab is active
 
-- [ ] should show the `(Functional | Class)CreateDogForm` component
+- [X] should show the `(Functional | Class)CreateDogForm` component
 - [x] should not show the `Dogs` component
 
 ### Tabs
