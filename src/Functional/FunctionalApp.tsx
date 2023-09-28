@@ -4,11 +4,11 @@ import { FunctionalDogs } from "./FunctionalDogs";
 import { FunctionalSection } from "./FunctionalSection";
 import { Requests } from "../api";
 import { Dog } from "../types";
-import { set } from "lodash-es";
 
 export function FunctionalApp() {
   const { getAllDogs } = Requests;
   const [view, setView] = useState("allDogs");
+  const [isLoading, setIsLoading] = useState(false);
   const [dogs, setDogs] = useState([] as Dog[]);
   const [allDogs, setAllDogs] = useState([] as Dog[]);
   const favoriteDogsCount = allDogs.filter((dog) => dog.isFavorite).length;
@@ -29,10 +29,17 @@ export function FunctionalApp() {
   };
 
   const fetchAllDogs = () => {
-    getAllDogs().then((allDogData) => {
-      dogs.length === 0 ? setDogs(allDogData) : setDogsByView(view, allDogData);
-      setAllDogs(allDogData);
-    });
+    setIsLoading(true);
+    getAllDogs()
+      .then((allDogData) => {
+        dogs.length === 0
+          ? setDogs(allDogData)
+          : setDogsByView(view, allDogData);
+        setAllDogs(allDogData);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -51,9 +58,18 @@ export function FunctionalApp() {
         unfavoriteCount={unfavoriteDogsCount}
       >
         {view !== "createDog" ? (
-          <FunctionalDogs dogs={dogs} refreshDogs={fetchAllDogs} />
+          <FunctionalDogs
+            dogs={dogs}
+            refreshDogs={fetchAllDogs}
+            isLoading={isLoading}
+            setLoading={setIsLoading}
+          />
         ) : (
-          <FunctionalCreateDogForm refreshDogs={fetchAllDogs} />
+          <FunctionalCreateDogForm
+            refreshDogs={fetchAllDogs}
+            isLoading={isLoading}
+            setLoading={setIsLoading}
+          />
         )}
       </FunctionalSection>
     </div>

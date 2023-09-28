@@ -146,6 +146,13 @@
       "image": "/assets/boxer.jpeg",
       "isFavorite": false,
       "id": 21
+    },
+    {
+      "name": "Lovely",
+      "description": "Good girl",
+      "image": "/assets/chihuahua.avif",
+      "isFavorite": false,
+      "id": 22
     }
   ]
 }

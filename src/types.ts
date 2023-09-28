@@ -19,8 +19,12 @@ export type SectionProps = {
 export type DogsProps = {
   dogs: Dog[];
   refreshDogs: () => void;
+  isLoading: boolean;
+  setLoading: (isLoading: boolean) => void;
 };
 
 export type CreateDogProps = {
-    refreshDogs: () => void;
+  refreshDogs: () => void;
+  isLoading: boolean;
+  setLoading: (isLoading: boolean) => void;
 };

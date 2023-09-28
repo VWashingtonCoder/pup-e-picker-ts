@@ -2,12 +2,14 @@ import { useState } from "react";
 import { dogPictures } from "../dog-pictures";
 import { Requests } from "../api";
 import { CreateDogProps } from "../types";
+import toast from "react-hot-toast";
 
 // use this as your default selected image
 const defaultSelectedImage = dogPictures.BlueHeeler;
 
-export const FunctionalCreateDogForm = ({ refreshDogs }: CreateDogProps) => {
+export const FunctionalCreateDogForm = (props: CreateDogProps) => {
   const { postDog } = Requests;
+  const { refreshDogs, isLoading, setLoading } = props;
   const [formValues, setFormValues] = useState({
     name: "",
     description: "",
@@ -26,15 +28,22 @@ export const FunctionalCreateDogForm = ({ refreshDogs }: CreateDogProps) => {
       image: picture,
       isFavorite: false,
     };
-    postDog(newDog).then(() => {
-      alert(`Dog Created: ${name}`);
-      refreshDogs();
-      setFormValues({
-        name: "",
-        description: "",
-        picture: defaultSelectedImage,
+    setLoading(true);
+    postDog(newDog)
+      .then(() => {
+        refreshDogs();
+        setFormValues({
+          name: "",
+          description: "",
+          picture: defaultSelectedImage,
+        });
+      })
+      .then(() => {
+        toast.success(`Dog Created: ${name}`);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-    });
   };
 
   return (
@@ -49,20 +58,20 @@ export const FunctionalCreateDogForm = ({ refreshDogs }: CreateDogProps) => {
       <h4>Create a New Dog</h4>
 
       <label htmlFor="name">Dog Name</label>
-      <input 
+      <input
         id="name"
-        type="text" 
-        disabled={false}
+        type="text"
+        disabled={isLoading}
         value={name}
-        onChange={(e) => handleInputChange("name", e.target.value)} 
+        onChange={(e) => handleInputChange("name", e.target.value)}
       />
 
       <label htmlFor="description">Dog Description</label>
-      <textarea 
-        id="description" 
-        cols={80} 
-        rows={10} 
-        disabled={false}
+      <textarea
+        id="description"
+        cols={80}
+        rows={10}
+        disabled={isLoading}
         value={description}
         onChange={(e) => handleInputChange("description", e.target.value)}
       ></textarea>
@@ -72,6 +81,7 @@ export const FunctionalCreateDogForm = ({ refreshDogs }: CreateDogProps) => {
         id="picture"
         onChange={(e) => handleInputChange("picture", e.target.value)}
         value={picture}
+        disabled={isLoading}
       >
         {Object.entries(dogPictures).map(([label, pictureValue]) => {
           return (
@@ -81,7 +91,7 @@ export const FunctionalCreateDogForm = ({ refreshDogs }: CreateDogProps) => {
           );
         })}
       </select>
-      <input type="submit" />
+      <input type="submit" disabled={isLoading} />
     </form>
   );
 };
