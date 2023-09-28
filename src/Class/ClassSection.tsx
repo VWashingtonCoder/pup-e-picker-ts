@@ -1,9 +1,16 @@
 // you can use `ReactNode` to add a type to the children prop
-import { Component } from "react";
+import { Component, ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { SectionProps } from "../types";
 
-export class ClassSection extends Component<SectionProps> {
+type ClassSectionProps = {
+  children: ReactNode;
+  view: string;
+  favoriteCount: number;
+  unfavoriteCount: number;
+  changeView: (view: string) => void;
+};
+
+export class ClassSection extends Component<ClassSectionProps> {
   render() {
     const { children, view, changeView, favoriteCount, unfavoriteCount } =
       this.props;

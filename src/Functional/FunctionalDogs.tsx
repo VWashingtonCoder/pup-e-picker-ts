@@ -1,8 +1,15 @@
 import { DogCard } from "../Shared/DogCard";
-import { DogsProps } from "../types";
+import { Dog } from "../types";
 import { Requests } from "../api";
 
-export const FunctionalDogs = (props: DogsProps) => {
+type FunctionalDogsProps = {
+  dogs: Dog[];
+  refreshDogs: () => void;
+  isLoading: boolean;
+  setLoading: (isLoading: boolean) => void;
+};
+
+export const FunctionalDogs = (props: FunctionalDogsProps) => {
   const { dogs, refreshDogs, isLoading, setLoading } = props;
   const { deleteDog, updateDog } = Requests;
 

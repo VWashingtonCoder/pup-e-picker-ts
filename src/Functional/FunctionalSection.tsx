@@ -1,7 +1,15 @@
+import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { SectionProps } from "../types";
 
-export const FunctionalSection = (props: SectionProps) => {
+type FunctionalSectionProps = {
+  children: ReactNode;
+  view: string;
+  favoriteCount: number;
+  unfavoriteCount: number;
+  changeView: (view: string) => void;
+};
+
+export const FunctionalSection = (props: FunctionalSectionProps) => {
   const { children, view, changeView, favoriteCount, unfavoriteCount } = props;
   return (
     <section id="main-section">

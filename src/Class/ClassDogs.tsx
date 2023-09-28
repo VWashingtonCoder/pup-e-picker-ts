@@ -1,9 +1,16 @@
 import { DogCard } from "../Shared/DogCard";
 import { Component } from "react";
 import { Requests } from "../api";
-import { DogsProps } from "../types";
+import { Dog } from "../types";
 
-export class ClassDogs extends Component<DogsProps> {
+type ClassDogsProps = {
+  dogs: Dog[];
+  refreshDogs: () => void;
+  isLoading: boolean;
+  setLoading: (isLoading: boolean) => void;
+};
+
+export class ClassDogs extends Component<ClassDogsProps> {
   handleDeleteClick = (id: number) => {
     const { setLoading, refreshDogs } = this.props;
     setLoading(true);

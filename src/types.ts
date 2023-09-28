@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 // Add your own custom types in here
 export type Dog = {
   id?: number;
@@ -8,23 +7,6 @@ export type Dog = {
   isFavorite: boolean;
 };
 
-export type SectionProps = {
-  children: ReactNode;
-  view: string;
-  favoriteCount: number;
-  unfavoriteCount: number;
-  changeView: (view: string) => void;
-};
 
-export type DogsProps = {
-  dogs: Dog[];
-  refreshDogs: () => void;
-  isLoading: boolean;
-  setLoading: (isLoading: boolean) => void;
-};
 
-export type CreateDogProps = {
-  refreshDogs: () => void;
-  isLoading: boolean;
-  setLoading: (isLoading: boolean) => void;
-};
+

@@ -1,10 +1,15 @@
 import { Component } from "react";
 import { dogPictures } from "../dog-pictures";
-import { CreateDogProps } from "../types";
 import { Requests } from "../api";
 import toast from "react-hot-toast";
 
-export class ClassCreateDogForm extends Component<CreateDogProps> {
+type ClassCreateDogProps = {
+  refreshDogs: () => void;
+  isLoading: boolean;
+  setLoading: (isLoading: boolean) => void;
+};
+
+export class ClassCreateDogForm extends Component<ClassCreateDogProps> {
   state = {
     name: "",
     description: "",

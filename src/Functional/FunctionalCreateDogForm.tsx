@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { dogPictures } from "../dog-pictures";
 import { Requests } from "../api";
-import { CreateDogProps } from "../types";
 import toast from "react-hot-toast";
+
+type FunctionalCreateDogProps = {
+  refreshDogs: () => void;
+  isLoading: boolean;
+  setLoading: (isLoading: boolean) => void;
+};
 
 // use this as your default selected image
 const defaultSelectedImage = dogPictures.BlueHeeler;
 
-export const FunctionalCreateDogForm = (props: CreateDogProps) => {
+export const FunctionalCreateDogForm = (props: FunctionalCreateDogProps) => {
   const { postDog } = Requests;
   const { refreshDogs, isLoading, setLoading } = props;
   const [formValues, setFormValues] = useState({
