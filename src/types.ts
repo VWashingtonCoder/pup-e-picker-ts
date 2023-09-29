@@ -7,6 +7,6 @@ export type Dog = {
   isFavorite: boolean;
 };
 
-
+export type DogView = "allDogs" | "favoriteDogs" | "unfavoriteDogs" | "createDog";
 
 

@@ -1,19 +1,20 @@
 // you can use `ReactNode` to add a type to the children prop
 import { Component, ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { Dog, DogView } from "../types";
 
 type ClassSectionProps = {
   children: ReactNode;
+  allDogs: Dog[];
   view: string;
-  favoriteCount: number;
-  unfavoriteCount: number;
-  changeView: (view: string) => void;
+  changeView: (newView: DogView) => void;
 };
 
 export class ClassSection extends Component<ClassSectionProps> {
   render() {
-    const { children, view, changeView, favoriteCount, unfavoriteCount } =
-      this.props;
+    const { children, view, changeView, allDogs } = this.props;
+    const favoriteCount = allDogs.filter((dog) => dog.isFavorite).length;
+    const unfavoriteCount = allDogs.filter((dog) => !dog.isFavorite).length;
 
     return (
       <section id="main-section">

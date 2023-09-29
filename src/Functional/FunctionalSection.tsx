@@ -1,16 +1,25 @@
-import { ReactNode } from "react";
+import { Dispatch, ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { Dog, DogView } from "../types";
 
 type FunctionalSectionProps = {
   children: ReactNode;
-  view: string;
-  favoriteCount: number;
-  unfavoriteCount: number;
-  changeView: (view: string) => void;
+  allDogs: Dog[];
+  view: DogView;
+  setView: Dispatch<DogView>;
 };
 
 export const FunctionalSection = (props: FunctionalSectionProps) => {
-  const { children, view, changeView, favoriteCount, unfavoriteCount } = props;
+  const { children, allDogs, view, setView } = props;
+
+  const favoriteCount = allDogs.filter((dog) => dog.isFavorite).length;
+  const unfavoriteCount = allDogs.filter((dog) => !dog.isFavorite).length;
+
+  const changeView = (newView: DogView) => {
+    const nextView = newView === view ? "allDogs" : newView;
+    setView(nextView);
+  }
+
   return (
     <section id="main-section">
       <div className="container-header">

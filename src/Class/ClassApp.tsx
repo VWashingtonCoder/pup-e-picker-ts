@@ -3,13 +3,12 @@ import { ClassSection } from "./ClassSection";
 import { ClassDogs } from "./ClassDogs";
 import { ClassCreateDogForm } from "./ClassCreateDogForm";
 import { Requests } from "../api";
-import { Dog } from "../types";
+import { Dog, DogView } from "../types";
 
 export class ClassApp extends Component {
   state = {
-    view: "allDogs",
-    isLoading: false,
-    dogs: [] as Dog[],
+    view: "allDogs" as DogView,
+    isLoading: false as boolean,
     allDogs: [] as Dog[],
   };
 
@@ -17,28 +16,16 @@ export class ClassApp extends Component {
     this.setState({ isLoading });
   };
 
-  setDogsByView = (newView: string, allDogData: Dog[]) => {
-    if (newView === "favoriteDogs")
-      this.setState({ dogs: allDogData.filter((dog) => dog.isFavorite) });
-    else if (newView === "unfavoriteDogs")
-      this.setState({ dogs: allDogData.filter((dog) => !dog.isFavorite) });
-    else if (newView === "allDogs") this.setState({ dogs: allDogData });
-  };
-
-  changeView = (newView: string) => {
-    const { view, allDogs } = this.state;
-    const nextView = newView === view ? "allDogs" : newView;
-    this.setDogsByView(nextView, allDogs);
-    this.setState({ view: nextView });
+  changeView = (newView: DogView) => {
+    const nextView = newView === this.state.view ? "allDogs" : newView;
+    this.setState({ nextView });
   };
 
   fetchAllDogs = () => {
     const { getAllDogs } = Requests;
-    const { view } = this.state;
     this.updateLoading(true);
     getAllDogs()
       .then((allDogData) => {
-        this.setDogsByView(view, allDogData);
         this.setState({ allDogs: allDogData });
       })
       .finally(() => {
@@ -51,9 +38,12 @@ export class ClassApp extends Component {
   }
 
   render() {
-    const { view, isLoading, dogs, allDogs } = this.state;
-    const favoriteDogsCount = allDogs.filter((dog) => dog.isFavorite).length;
-    const unfavoriteDogsCount = allDogs.filter((dog) => !dog.isFavorite).length;
+    const { view, isLoading, allDogs } = this.state;
+    const filteredDogs = allDogs.filter((dog) => {
+      if (view === "favoriteDogs") return dog.isFavorite;
+      else if (view === "unfavoriteDogs") return !dog.isFavorite;
+      else return true;
+    });
 
     return (
       <div className="App" style={{ backgroundColor: "goldenrod" }}>
@@ -63,12 +53,11 @@ export class ClassApp extends Component {
         <ClassSection
           view={view}
           changeView={this.changeView}
-          favoriteCount={favoriteDogsCount}
-          unfavoriteCount={unfavoriteDogsCount}
+          allDogs={allDogs}
         >
           {view !== "createDog" ? (
             <ClassDogs
-              dogs={dogs}
+              dogs={filteredDogs}
               isLoading={isLoading}
               refreshDogs={this.fetchAllDogs}
               setLoading={this.updateLoading}
